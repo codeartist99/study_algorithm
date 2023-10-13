@@ -4,34 +4,18 @@ public class Main {
     public static void main(String[] args) {	
 		Scanner sc = new Scanner(System.in);
 
-		char[] n = sc.next().toLowerCase().toCharArray();
+		String n = sc.next();
 		int b = sc.nextInt();
 
-		char[] alphabets = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-		
 		int result = 0;
-
-		if (b <= 10) {
-			for (int i = 0; i < n.length; i++) {
-				result += Character.getNumericValue(n[n.length - 1 - i]) * Math.pow(b, i);
-			}
-		} else {
-			for (int i = 0; i < n.length; i++) {
-				char current = n[n.length - 1 - i];
-				for (int j = 0; j < b; j++) {
-					if (j < 10) {
-						if (Character.getNumericValue(current) == j) {
-							result += Character.getNumericValue(current) * Math.pow(b, i);
-						}
-					} else {
-						if (current == alphabets[j - 10]) {
-							result += j * Math.pow(b, i);
-						}
-					}
-				}
+		for (int i = 0; i < n.length(); i++) {
+			char current = n.charAt(n.length() - 1 - i);
+			if (Character.isDigit(current)) {
+				result += Character.getNumericValue(current) * Math.pow(b, i);
+			} else {
+				result += (current - 'A' + 10) * Math.pow(b, i);
 			}
 		}
 		System.out.println(result);
-
 	}
 }
